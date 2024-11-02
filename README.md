@@ -39,7 +39,7 @@ This is a simple yet powerful Todo application built using Flask and SQLAlchemy,
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/mAasim1026/flask-todo-app.git
+   git clone https://github.com/mAasim1026/flask-todo.git
    cd flask-todo-app
    ```
 
