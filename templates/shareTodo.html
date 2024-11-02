@@ -1,0 +1,165 @@
+{% extends 'nav.html' %}
+{% block body %}
+
+    <div class="container my-3">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+      <h2>Share Todo (Currently 1 User)</h2>
+      <form action="/shared/todo" method="POST">
+        <div class="mb-3">
+          <label for="title" class="form-label">Todo Title*</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="desc" class="form-label">Todo Desciptions*</label>
+          <input
+            type="text"
+            id="desc"
+            name="desc"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="due_date" class="form-label">Due Date</label>
+          <input
+            type="datetime-local"
+            id="due_date"
+            name="due_date"
+            class="form-control"/>
+        </div>
+        <div class="md-3">
+          <label for="priority" class="form-label">Priority</label>
+          <select id="priority" name="priority" class="form-control">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="tags" class="form-label">Tags (comma-separated)</label>
+          <input type="text" class="form-control" id="tags" name="tags"/>
+        </div>
+        <div class="mb-3">
+          <label for="shared_with" class="form-label">Share with another User (User must be registered)</label>
+          <input 
+            type="email" 
+            placeholder="Email of User you want to share to(e.g. aasim@cse.iitb.ac.in)" 
+            class="form-control" 
+            id="shared_with" 
+            name="shared_with"
+            required
+            />
+        </div>
+
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+      </form>
+    </div>
+    <div class="container my-3">
+      <form method="GET" action="{{ url_for('dashboard') }}" class="mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <select name="priority" class="form-select" onchange="this.form.submit()">
+                    <option value="All" {% if priority_filter == 'All' %}selected{% endif %}>All Priorities</option>
+                    <option value="Low" {% if priority_filter == 'Low' %}selected{% endif %}>Low</option>
+                    <option value="Medium" {% if priority_filter == 'Medium' %}selected{% endif %}>Medium</option>
+                    <option value="High" {% if priority_filter == 'High' %}selected{% endif %}>High</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="tag" class="form-control" placeholder="Filter by tags" value="{{ tag_filter }}">
+            </div>
+            <div class="col-md-4 d-flex ">
+              <button type="submit" class="btn btn-primary ms-5">Apply Filters</button>
+              <button type="button" class="btn btn-secondary ms-5" onclick="clearFilters()">Clear Filters</button>
+          </div>
+        </div>
+    </form>
+    
+</div>
+
+    <div class="container my-3">
+      <h2>Your Sharelist</h2>
+      <h5>(Todos that others have shared with you will appear here)</h5>
+      
+      {% if allTodo|length == 0 %}
+      <div class="alert alert-info" role="alert">
+        No Shared Todos added yet!
+      </div>
+      {% else %}
+        <table class="table table-dark table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Date</th>
+              <th scope="col">Due Date</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Todo Creator</th>
+              <th scope="col">Shared With</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for todo in allTodo %}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.desc }}</td>
+                <td>{{ todo.date_created.strftime('%d-%m-%Y %I:%M %p') }}</td>
+                <td>{{ todo.due_date.strftime('%d-%m-%Y %I:%M %p') if todo.due_date else 'No Due Date'}}</td>
+                <td>{{ todo.priority }}</td>
+                <td>{{ todo.tags }}</td>
+                <td>{{ todo.user_email}}</td>
+                <td>{{ todo.shareWith}}</td>
+                <td>{{ todo.status}}</td>
+                <td>
+                    <div class="d-flex">
+                        <span class="d-inline mx-1">
+                            <a href="/completeShareTodo/{{ todo.sno }}" class="btn btn-success btn-sm">Done!!</a>
+                        </span>
+                        <span class="d-inline mx-1">
+                            <a href="/stillgoingShareTodo/{{ todo.sno }}" class="btn btn-warning btn-sm">Going!!</a>
+                        </span>
+                    </div>
+                    
+                    
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+    <script>
+      function clearFilters() {
+          document.querySelector('select[name="priority"]').value = "All"; 
+          document.querySelector('input[name="tag"]').value = "";
+          this.form.submit(); 
+      }
+      </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+
+{% endblock body %}

@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Styles for the side images */
+.side-image {
+    position: absolute;
+  
+    background-image: url('todo_paper.jpg'); 
+    background-size: cover;
+    opacity: 1;
+}
+
+/* First image on each side */
+.side-image.left {
+    top: 10%;
+    left: -70px;
+    width: 100px;
+    height: 80px;
+    transform: rotate(-15deg);
+}
+
+.side-image.right {
+    top: 1%;
+    right: -80px;
+    width: 100px;
+    height: 100px;
+    transform: rotate(35deg);
+}
+
+/* Second image on each side */
+.side-image.left.second {
+    top: 40%;
+    left: -70px;
+    width: 80px;
+    height: 60px;
+    transform: rotate(20deg);
+    background-image: url('todo_paper2.jpg'); 
+}
+
+.side-image.right.second {
+    top: 35%;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+    transform: rotate(-10deg);
+    background-image: url('todo_paper2.jpg'); 
+}
+
+/* third image on each side */
+.side-image.left.third {
+    top: 60%;
+    left: -110px;
+    width: 120px;
+    height: 130px;
+    transform: rotate(5deg);
+    background-image: url('todo_paper3.jpg'); 
+}
+
+.side-image.right.third {
+    top: 75%;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+    transform: rotate(10deg);
+    background-image: url('todo_paper3.jpg'); 
+}
+
+.header h1 {
+    font-size: 2.2em;
+    color: #333;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.content {
+    font-size: 1.1em;
+    color: #444;
+    line-height: 1.6em;
+    text-align: left;
+}
+
+.content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.button-container {
+    margin-top: 30px;
+}
+
+.button-container .button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1em;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container .button:hover {
+    background-color: #218838;
+}
+
+
+.flash-messages {
+    margin-top: 20px; 
+    margin-bottom: 10px;
+}
+.alert {
+    text-align: center;
+    border: 2px solid #1ee048;
+    border-radius: 5px; 
+    padding: 10px;
+    font-weight: bold;
+}

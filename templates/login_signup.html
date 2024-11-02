@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <!-- Flash Message-->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <h1 class="main-heading">Create Your Todos Now...</h1> 
+        <div class="row">
+            <div class="video-container">
+                <video autoplay muted loop>
+                    <source src="{{ url_for('static', filename='videos/5717419-hd_1920_1080_25fps.mp4') }}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="wrapper">
+                <label class="switch">
+                    <input class="toggle" type="checkbox" />
+                    <span class="slider"></span>
+                    <span class="card-side"></span>
+                    <div class="flip-card__inner">
+                        <div class="flip-card__front">
+                            <div class="title">Log in</div>
+                            <form action="{{ url_for('login_signup')}}" method="POST" class="flip-card__form">
+                                <input type="email" placeholder="Email" name="email" class="flip-card__input" />
+                                <input type="password" placeholder="Password" name="password" class="flip-card__input" />
+                                <button class="flip-card__btn">Let’s go!</button>
+                            </form>
+                        </div>
+                        <div class="flip-card__back">
+                            <div class="title">Sign up</div>
+                            <form action="{{ url_for('login_signup')}}" method="POST" class="flip-card__form">
+                                <input type="text" placeholder="Name" name="name" class="flip-card__input" />
+                                <input type="email" placeholder="Email" name="email" class="flip-card__input" />
+                                <input type="password" placeholder="Password" name="password" class="flip-card__input" />
+                                <button class="flip-card__btn">Confirm!</button>
+                            </form>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

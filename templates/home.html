@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home-style.css') }}" />
+</head>
+<body>
+   
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+        <!-- First images  -->
+        <div class="side-image left"></div>
+        <div class="side-image right"></div>
+        
+        <!-- Second images  -->
+        <div class="side-image left second"></div>
+        <div class="side-image right second"></div>
+
+        <!-- Third images  -->
+        <div class="side-image left third"></div>
+        <div class="side-image right third"></div>
+
+        <div class="header">
+            <h1>Welcome to Your Personal Todo App</h1>
+            <p>Your personal space to organize and track all your tasks with ease!</p>
+        </div>
+        <div class="content">
+            <p>This app allows you to:</p>
+            <ul>
+                <li>Create and manage personalized to-do lists</li>
+                <li>Login and securely save your tasks</li>
+                <li>Access your to-do list from anywhere, anytime</li>
+                <li>Share your Todos with others</li>
+            </ul>
+            <p>Stay organized and never miss an important task with your Todo app.</p>
+        </div>
+        <div class="button-container">
+            <a href="{{ url_for('login_signup') }}" class="button">Continue to Login</a>
+        </div>
+    </div>
+</body>
+</html>
