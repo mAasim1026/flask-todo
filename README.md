@@ -133,7 +133,3 @@ This is a simple yet powerful Todo application built using Flask and SQLAlchemy,
 - **Recurring Tasks**: Add support for tasks that repeat on a schedule.
 - **Mobile Notifications**: Send mobile push notifications for due reminders.
 - **Task Assignment**: Allow users to assign tasks to collaborators.
-
-### License
-
-This project is open-source and licensed under the MIT License.
